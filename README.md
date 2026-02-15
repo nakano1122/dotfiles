@@ -1,6 +1,8 @@
-# Claude Code グローバル設定・スキル管理
+# AI コーディングエージェント共通スキル & 設定
 
-[chezmoi](https://www.chezmoi.io/) を使って Claude Code のグローバル設定とカスタムスキルを管理するリポジトリ。
+[chezmoi](https://www.chezmoi.io/) を使って AI コーディングエージェント向けの共通スキルと設定を管理するリポジトリ。
+
+スキルはエージェント非依存のナレッジベース（Markdown）として設計されており、Claude Code・OpenAI Codex CLI など、スキルファイルを読み込めるエージェントであれば利用可能。
 
 
 ## ディレクトリ構成
@@ -10,21 +12,28 @@ chezmoi ソース                デプロイ先
 ─────────────────────────    ──────────────────
 dot_agents/                → ~/.agents/
 ├── AGENTS.md                 ├── AGENTS.md          # エージェント共通ルール
-├── CLAUDE.md                 ├── CLAUDE.md          # Claude Code グローバル設定
-└── skills/                   └── skills/            # カスタムスキル群
+├── CLAUDE.md                 ├── CLAUDE.md          # Claude Code 固有設定
+└── skills/                   └── skills/            # 共通スキル群
     ├── accessibility/            ├── accessibility/
     ├── api-design/               ├── api-design/
     ├── ...                       ├── ...
     └── web-security/             └── web-security/
 ```
 
-### シンボリックリンク
+### エージェントごとの連携方法
 
-Claude Code が認識するパス（`~/.claude/`）から `~/.agents/` へシンボリックリンクを張ることで連携する。
+各エージェントが `~/.agents/` 配下のスキルを認識できるよう、シンボリックリンクで連携する。
 
 ```
-~/.claude/CLAUDE.md → ~/.agents/CLAUDE.md
-~/.claude/skills    → ~/.agents/skills
+Claude Code:  ~/.claude/CLAUDE.md → ~/.agents/CLAUDE.md
+              ~/.claude/skills    → ~/.agents/skills
+Codex CLI:    ~/.codex/skills     → ~/.agents/skills
+```
+
+セットアップスクリプトで一括作成できる：
+
+```bash
+./setup.sh
 ```
 
 
@@ -33,7 +42,7 @@ Claude Code が認識するパス（`~/.claude/`）から `~/.agents/` へシン
 | ファイル | 役割 |
 |---------|------|
 | `AGENTS.md` | エージェント共通ルール（言語設定、Skill ルーティング、作業フロー、進捗報告） |
-| `CLAUDE.md` | Claude Code のグローバル設定（基本方針、コミュニケーション、Skill 利用ルール、並列開発ルール） |
+| `CLAUDE.md` | Claude Code 固有設定（基本方針、コミュニケーション、Skill 利用ルール、並列開発ルール） |
 
 
 ## スキル一覧
@@ -98,7 +107,17 @@ Claude Code が認識するパス（`~/.claude/`）から `~/.agents/` へシン
 | skill-reviewer | スキルのベストプラクティス適合レビュー |
 
 
-## 使い方
+## セットアップ
+
+```bash
+# 1. chezmoi で ~/.agents/ にデプロイ
+chezmoi apply
+
+# 2. 各エージェントへのシンボリックリンクを作成
+./setup.sh
+```
+
+## 日常の使い方
 
 ```bash
 # 差分確認
