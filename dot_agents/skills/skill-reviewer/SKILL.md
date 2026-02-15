@@ -11,8 +11,8 @@ Claude Code スキルをベストプラクティスに照らしてレビュー�
 
 ```
 1. 対象スキルの特定
-   - パス指定: ~/.claude/skills/<skill-name>/
-   - 一括: ~/.claude/skills/ 配下全スキル
+   - パス指定: ~/.agents/skills/<skill-name>/
+   - 一括: ~/.agents/skills/ 配下全スキル
 
 2. ディレクトリ構造の確認
    - SKILL.md の存在確認
@@ -112,10 +112,10 @@ SKILL.md が存在する？
 
 ## 一括レビュー
 
-`~/.claude/skills/` 配下の全スキルを対象にレビューする場合:
+`~/.agents/skills/` 配下の全スキルを対象にレビューする場合:
 
 ```
-1. ls ~/.claude/skills/ でスキル一覧を取得
+1. ls ~/.agents/skills/ でスキル一覧を取得
 2. 各スキルに対してレビューワークフローを実行
 3. サマリーテーブルを出力:
 
