@@ -101,6 +101,12 @@ Codex CLI:    ~/.codex/AGENTS.md   → ~/.agents/AGENTS.md
 | debugging | フロントエンド・バックエンド両対応のデバッグ |
 | codex-cli | OpenAI Codex CLI をセカンドオピニオンとして活用 |
 
+### ML・データサイエンス（1）
+
+| スキル名 | 概要 |
+|---------|------|
+| search-model-builder | HuggingFace/sentence-transformers ベースの検索モデル構築 |
+
 ### スキル管理（1）
 
 | スキル名 | 概要 |
