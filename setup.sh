@@ -43,9 +43,12 @@ fi
 # --- Codex CLI ---
 CODEX_DIR="$HOME/.codex"
 CODEX_SKILLS="$CODEX_DIR/skills"
+CODEX_AGENTS_MD="$CODEX_DIR/AGENTS.md"
+AGENTS_MD="$AGENTS_DIR/AGENTS.md"
 
 mkdir -p "$CODEX_DIR"
 
+# skills symlink
 if [ -L "$CODEX_SKILLS" ]; then
   echo "[Codex CLI]   $CODEX_SKILLS は既にシンボリックリンクです。スキップします。"
 elif [ -e "$CODEX_SKILLS" ]; then
@@ -53,6 +56,16 @@ elif [ -e "$CODEX_SKILLS" ]; then
 else
   ln -s "$AGENTS_SKILLS" "$CODEX_SKILLS"
   echo "[Codex CLI]   $CODEX_SKILLS → $AGENTS_SKILLS を作成しました。"
+fi
+
+# AGENTS.md symlink
+if [ -L "$CODEX_AGENTS_MD" ]; then
+  echo "[Codex CLI]   $CODEX_AGENTS_MD は既にシンボリックリンクです。スキップします。"
+elif [ -e "$CODEX_AGENTS_MD" ]; then
+  echo "Warning: $CODEX_AGENTS_MD が既に存在します（シンボリックリンクではありません）。手動で確認してください。" >&2
+else
+  ln -s "$AGENTS_MD" "$CODEX_AGENTS_MD"
+  echo "[Codex CLI]   $CODEX_AGENTS_MD → $AGENTS_MD を作成しました。"
 fi
 
 echo ""

@@ -25,9 +25,10 @@ dot_agents/                → ~/.agents/
 各エージェントが `~/.agents/` 配下のスキルを認識できるよう、シンボリックリンクで連携する。
 
 ```
-Claude Code:  ~/.claude/CLAUDE.md → ~/.agents/CLAUDE.md
-              ~/.claude/skills    → ~/.agents/skills
-Codex CLI:    ~/.codex/skills     → ~/.agents/skills
+Claude Code:  ~/.claude/CLAUDE.md  → ~/.agents/CLAUDE.md
+              ~/.claude/skills     → ~/.agents/skills
+Codex CLI:    ~/.codex/AGENTS.md   → ~/.agents/AGENTS.md
+              ~/.codex/skills      → ~/.agents/skills
 ```
 
 セットアップスクリプトで一括作成できる：
