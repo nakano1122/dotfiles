@@ -13,6 +13,7 @@ chezmoi ソース                デプロイ先
 dot_agents/                → ~/.agents/
 ├── AGENTS.md                 ├── AGENTS.md          # エージェント共通ルール
 ├── CLAUDE.md                 ├── CLAUDE.md          # Claude Code 固有設定
+├── setup.sh                  ├── setup.sh           # シンボリックリンク作成スクリプト
 └── skills/                   └── skills/            # 共通スキル群
     ├── accessibility/            ├── accessibility/
     ├── api-design/               ├── api-design/
@@ -121,7 +122,7 @@ Codex CLI:    ~/.codex/AGENTS.md   → ~/.agents/AGENTS.md
 chezmoi apply
 
 # 2. 各エージェントへのシンボリックリンクを作成
-./setup.sh
+~/.agents/setup.sh
 ```
 
 ## 日常の使い方
