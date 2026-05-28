@@ -17,8 +17,13 @@ dot_agents/                → ~/.agents/
 └── skills/                   └── skills/            # 共通スキル群
     ├── accessibility/            ├── accessibility/
     ├── api-design/               ├── api-design/
+    ├── figma-to-code/            ├── figma-to-code/
+    ├── web-design-principles/    ├── web-design-principles/
     ├── ...                       ├── ...
     └── web-security/             └── web-security/
+
+dot_claude/                → ~/.claude/
+└── symlink_skills            └── skills → ../.agents/skills
 ```
 
 ### エージェントごとの連携方法
@@ -84,15 +89,24 @@ Codex CLI:    ~/.codex/AGENTS.md   → ~/.agents/AGENTS.md
 | pytest-testing | pytest (Python) テスト実装 |
 | gotest-testing | go test (Go) テスト実装 |
 
+### UI/UX・デザイン実装（4）
+
+| スキル名 | 概要 |
+|---------|------|
+| figma-to-code | Figma MCP を使ったデザイン→コード変換 |
+| web-design-principles | Web デザイン実装の原則（親→子設計、相対サイズ、レスポンシブ、a11y） |
+| css-styling | CSS ベストプラクティス（モダン CSS、Container Queries、Cascade Layers） |
+| tailwind-css | Tailwind CSS 実装ガイド |
+
 ### セキュリティ・品質（3）
 
 | スキル名 | 概要 |
 |---------|------|
 | web-security | Web アプリケーションのセキュリティ設計・実装 |
-| accessibility | Web アクセシビリティ（WCAG 2.1 準拠） |
+| accessibility | Web アクセシビリティ（WCAG 2.2 準拠） |
 | observability | 可観測性設計（ログ・メトリクス・トレース） |
 
-### 開発ツール・運用（5）
+### 開発ツール・運用（7）
 
 | スキル名 | 概要 |
 |---------|------|
@@ -101,6 +115,8 @@ Codex CLI:    ~/.codex/AGENTS.md   → ~/.agents/AGENTS.md
 | cicd-github-actions | GitHub Actions ベースの CI/CD 設計・実装 |
 | debugging | フロントエンド・バックエンド両対応のデバッグ |
 | codex-cli | OpenAI Codex CLI をセカンドオピニオンとして活用 |
+| codex-task | Codex CLI タスク分解・実行ガイド |
+| drawio | draw.io ダイアグラム生成（PNG/SVG/PDF エクスポート対応） |
 
 ### ML・データサイエンス（1）
 
