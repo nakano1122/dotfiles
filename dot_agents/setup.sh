@@ -5,12 +5,39 @@ set -euo pipefail
 
 AGENTS_DIR="$HOME/.agents"
 AGENTS_SKILLS="$AGENTS_DIR/skills"
+CODEX_NATIVE_SKILLS="$HOME/.codex/skills"
+
+GENSHIJIN_SKILLS=(
+  "genshijin"
+  "genshijin-commit"
+  "genshijin-compress"
+  "genshijin-crew"
+  "genshijin-help"
+  "genshijin-review"
+  "genshijin-stats"
+)
 
 # 共通スキルディレクトリの存在確認
 if [ ! -d "$AGENTS_SKILLS" ]; then
   echo "Error: $AGENTS_SKILLS が見つかりません。先に chezmoi apply を実行してください。" >&2
   exit 1
 fi
+
+# genshijin skills install
+# chezmoi 管理下に存在しない場合、既存の Codex skills から ~/.agents/skills へ取り込む。
+for skill in "${GENSHIJIN_SKILLS[@]}"; do
+  target="$AGENTS_SKILLS/$skill"
+  source="$CODEX_NATIVE_SKILLS/$skill"
+
+  if [ -d "$target" ]; then
+    echo "[genshijin]   $target は既に存在します。スキップします。"
+  elif [ -d "$source" ]; then
+    cp -R "$source" "$target"
+    echo "[genshijin]   $source → $target をインストールしました。"
+  else
+    echo "Warning: $skill が見つかりません。必要な場合は genshijin skills を先に導入してください。" >&2
+  fi
+done
 
 # --- Claude Code ---
 CLAUDE_DIR="$HOME/.claude"
@@ -60,7 +87,13 @@ fi
 
 # AGENTS.md symlink
 if [ -L "$CODEX_AGENTS_MD" ]; then
-  echo "[Codex CLI]   $CODEX_AGENTS_MD は既にシンボリックリンクです。スキップします。"
+  current_target="$(readlink "$CODEX_AGENTS_MD")"
+  if [ "$current_target" = "$AGENTS_MD" ] || [ "$current_target" = "../.agents/AGENTS.md" ]; then
+    echo "[Codex CLI]   $CODEX_AGENTS_MD は既に正しいシンボリックリンクです。スキップします。"
+  else
+    ln -sfn "$AGENTS_MD" "$CODEX_AGENTS_MD"
+    echo "[Codex CLI]   $CODEX_AGENTS_MD → $AGENTS_MD に更新しました。"
+  fi
 elif [ -e "$CODEX_AGENTS_MD" ]; then
   echo "Warning: $CODEX_AGENTS_MD が既に存在します（シンボリックリンクではありません）。手動で確認してください。" >&2
 else
